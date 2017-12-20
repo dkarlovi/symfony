@@ -4,14 +4,21 @@ parameters:
         - .phpunit/phpunit-6.0/vendor/autoload.php
         - vendor/bin/.phpunit/phpunit-5.7/vendor/autoload.php
 
-        # Twig functions are called by the codebase, but are not autoloaded by default
-        - vendor/twig/twig/src/Extension/CoreExtension.php
-
+        ##
+        ## False positive
+        ##
         # files containing multiple classes are not autoloaded properly
         - src/Symfony/Component/Form/Tests/Extension/Csrf/Type/FormTypeCsrfExtensionTest.php
         - src/Symfony/Component/Form/Tests/Guess/GuessTest.php
         - src/Symfony/Component/Form/Tests/SimpleFormTest.php
         - src/Symfony/Component/Process/Tests/NonStopableProcess.php
+        - src/Symfony/Component/Routing/Tests/Generator/Dumper/PhpGeneratorDumperTest.php
+
+        ##
+        ## By design
+        ##
+        # Twig functions are called by the codebase, but are not autoloaded by default
+        - vendor/twig/twig/src/Extension/CoreExtension.php
     ignoreErrors:
         ##
         ## False positive
@@ -27,6 +34,8 @@ parameters:
         # traits do not own their own properties: https://github.com/symfony/symfony/pull/25536/files#r157608526
         - '#Access to an undefined property Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\InlineServiceConfigurator::\$id.#'
         - '#Access to an undefined property Symfony\\Component\\DependencyInjection\\Loader\\Configurator\\InlineServiceConfigurator::\$allowParent.#'
+        # passing variables to closures including files (creating a local scope with additional variables)
+        - '#Anonymous function has an unused use#'
         # not errors, actually expected to fail
         - '#Class Symfony\\Bundle\\FrameworkBundle\\Tests\\DependencyInjection\\Compiler\\NotFound not found.#'
         - '#Class Symfony\\Component\\DependencyInjection\\Tests\\Compiler\\NotExist not found.#'
@@ -45,6 +54,8 @@ parameters:
         ##
         # broken require-dev: https://github.com/symfony/symfony/pull/25536/files#r157591181
         - src/Symfony/Bridge/Monolog/Handler/SwiftMailerHandler.php
+        # creating classes on filesystem, cannot inspect them
+        - src/Symfony/Component/Routing/Tests/Generator/Dumper/PhpGeneratorDumperTest.php
 
         ##
         ## Temporary

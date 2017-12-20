@@ -55,7 +55,7 @@ class FormValidatorTest extends ConstraintValidatorTestCase
 
     protected function createValidator()
     {
-        return new FormValidator($this->serverParams);
+        return new FormValidator();
     }
 
     public function testValidate()

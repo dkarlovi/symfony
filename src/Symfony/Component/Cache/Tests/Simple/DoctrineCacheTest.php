@@ -26,6 +26,6 @@ class DoctrineCacheTest extends CacheTestCase
 
     public function createSimpleCache($defaultLifetime = 0)
     {
-        return new DoctrineCache(new ArrayCache($defaultLifetime), '', $defaultLifetime);
+        return new DoctrineCache(new ArrayCache(), '', $defaultLifetime);
     }
 }

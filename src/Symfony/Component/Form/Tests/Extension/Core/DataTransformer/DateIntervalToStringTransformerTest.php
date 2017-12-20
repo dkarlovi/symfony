@@ -84,7 +84,7 @@ class DateIntervalToStringTransformerTest extends DateIntervalTestCase
      */
     public function testReverseTransform($format, $input, $output)
     {
-        $reverseTransformer = new DateIntervalToStringTransformer($format, true);
+        $reverseTransformer = new DateIntervalToStringTransformer($format);
         $interval = new \DateInterval($output);
         $this->assertDateIntervalEquals($interval, $reverseTransformer->reverseTransform($input));
     }
@@ -94,7 +94,7 @@ class DateIntervalToStringTransformerTest extends DateIntervalTestCase
      */
     public function testReverseTransformDateString($format, $input, $output)
     {
-        $reverseTransformer = new DateIntervalToStringTransformer($format, true);
+        $reverseTransformer = new DateIntervalToStringTransformer($format);
         $interval = new \DateInterval($output);
         $this->{method_exists($this, $_ = 'expectException') ? $_ : 'setExpectedException'}(TransformationFailedException::class);
         $this->assertDateIntervalEquals($interval, $reverseTransformer->reverseTransform($input));

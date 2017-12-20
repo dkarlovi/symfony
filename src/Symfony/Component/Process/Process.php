@@ -1543,7 +1543,7 @@ class Process implements \IteratorAggregate
 
     private function getDefaultEnv()
     {
-        $env = getenv();
+        $env = getenv(null, false);
 
         foreach ($_ENV as $k => $v) {
             if (is_string($v)) {

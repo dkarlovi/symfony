@@ -27,6 +27,8 @@ abstract class TypeTestCase extends FormIntegrationTestCase
      */
     protected $dispatcher;
 
+    protected $validator;
+
     protected function setUp()
     {
         parent::setUp();
@@ -47,6 +49,7 @@ abstract class TypeTestCase extends FormIntegrationTestCase
         $extensions = array();
 
         if (in_array(ValidatorExtensionTrait::class, class_uses($this))) {
+            /** @var TypeTestCase&ValidatorExtensionTrait $this */
             $extensions[] = $this->getValidatorExtension();
         }
 
